@@ -1,0 +1,315 @@
+set sw=4
+set ts=4
+set et
+set smarttab
+set smartindent
+set lbr
+set fo+=mB
+set sm
+set selection=inclusive
+set wildmenu
+set mousemodel=popup
+set modifiable
+au FileType c setlocal dict+=~/.vim/dict/c.dict
+au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
+
+"插件管理pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+"注释管理
+let g:NERDSpaceDelims = 1
+
+"support system verilog
+let g:tagbar_type_systemverilog = {
+    \ 'ctagstype': 'systemverilog',
+    \ 'kinds' : [
+         \'A:assertions',
+         \'C:classes',
+         \'E:enumerators',
+         \'I:interfaces',
+         \'K:packages',
+         \'M:modports',
+         \'P:programs',
+         \'Q:prototypes',
+         \'R:properties',
+         \'S:structs and unions',
+         \'T:type declarations',
+         \'V:covergroups',
+         \'b:blocks',
+         \'c:constants',
+         \'e:events',
+         \'f:functions',
+         \'m:modules',
+         \'n:net data types',
+         \'p:ports',
+         \'r:register data types',
+         \'t:tasks',
+     \],
+     \ 'sro': '.',
+     \ 'kind2scope' : {
+        \ 'K' : 'package',
+        \ 'C' : 'class',
+        \ 'm' : 'module',
+        \ 'P' : 'program',
+        \ 'I' : 'interface',
+        \ 'M' : 'modport',
+        \ 'f' : 'function',
+        \ 't' : 'task',
+     \},
+     \ 'scope2kind' : {
+        \ 'package'   : 'K',
+        \ 'class'     : 'C',
+        \ 'module'    : 'm',
+        \ 'program'   : 'P',
+        \ 'interface' : 'I',
+        \ 'modport'   : 'M',
+        \ 'function'  : 'f',
+        \ 'task'      : 't',
+     \ },
+     \}
+
+"verilog begin end match
+let b:match_words = '\<if\>:\<endif\>:\<else\>,'
+\ . '\<while\>:\<continue\>,'
+\ . '\<begin\>:\<end\>,'
+\ . '\<module\>:\<endmodule\>,'
+\ . '\<class\>:\<endclass\>,'
+\ . '\<program\>:\<endprogram\>,'
+\ . '\<clocking\>:\<endclocking\>,'
+\ . '\<property\>:\<endproperty\>,'
+\ . '\<sequence\>:\<endsequence\>,'
+\ . '\<package\>:\<endpackage\>,'
+\ . '\<covergroup\>:\<endgroup\>,'
+\ . '\<primitive\>:\<endprimitive\>,'
+\ . '\<specify\>:\<endspecify\>,'
+\ . '\<generate\>:\<endgenerate\>,'
+\ . '\<interface\>:\<endinterface\>,'
+\ . '\<function\>:\<endfunction\>,'
+\ . '\<task\>:\<endtask\>,'
+\ . '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,'
+\ . '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,'
+\ . '`ifdef\>:`else\>:`endif\>,'
+\ . '\<generate\>:\<endgenerate\>'
+" 函数和变量列表
+map <F4> :TlistToggle<CR>
+" 查找文件
+":map <F1> :Leaderf file<CR>
+" 保存会话
+map <F7> :mksession ~/.vim/vimbook.vim<CR>
+map <F8> :source ~/.vim/vimbook.vim<CR>
+let g:Lf_PreviewInPopup = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 显示相关  
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+set cul "高亮光标所在行
+set cuc
+set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
+set go=             " 不要图形按钮  
+let g:molokai_original = 1
+let g:rehash256 = 1
+"let &t_Co=256
+hi Type gui=none
+hi Conditional term=none cterm=none ctermfg=Yellow guifg=#ffff60 gui=none
+hi Repeat term=none cterm=none ctermfg=Yellow guifg=#ffff60 gui=none
+hi Keyword term=none cterm=none ctermfg=Yellow guifg=#ffff60 gui=none
+hi Operator term=none cterm=none ctermfg=Yellow guifg=#ffff60 gui=none
+hi Statement term=none cterm=none ctermfg=Yellow guifg=#ffff60 gui=none
+hi Label term=none cterm=none ctermfg=Yellow guifg=#ffff60 gui=none
+"set guifont=Courier_New:h10:cANSI   " 设置字体  
+autocmd InsertEnter * se cul    " 用浅色高亮当前行  
+set ruler           " 显示标尺  
+set showcmd         " 输入的命令显示出来，看的清楚些  
+"set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)  
+set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离  
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
+set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)  
+set syn=c
+" 显示中文帮助
+if version >= 603
+	set helplang=cn
+	set encoding=utf-8
+endif
+" 自动缩进
+set autoindent
+set cindent
+" Tab键的宽度
+set tabstop=4
+" 统一缩进为4
+set softtabstop=4
+set shiftwidth=4
+" 使用空格代替制表符
+set expandtab
+" 在行和段开始处使用制表符
+set smarttab
+" 显示行号
+set number
+" 历史记录数
+set history=1000
+"搜索逐字符高亮
+set hlsearch
+set incsearch
+"语言设置
+set langmenu=zh_CN.UTF-8
+set helplang=cn
+" 总是显示状态行
+set cmdheight=2
+" 侦测文件类型
+"filetype on
+" 载入文件类型插件
+"filetype plugin on
+" 为特定文件类型载入相关缩进文件
+"filetype indent on
+" 保存全局变量
+set viminfo+=!
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-
+" 字符间插入的像素行数目
+"""" 
+"""" airline使用
+let g:airline_theme="c" 
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1   
+ "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+ "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+ let g:airline#extensions#tabline#enabled = 1
+ let g:airline#extensions#tabline#buffer_nr_show = 1
+ " 关闭状态显示空白符号计数,这个对我用处不大"
+ let g:airline#extensions#whitespace#enabled = 0
+ let g:airline#extensions#whitespace#symbol = '!'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"键盘命令
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:nmap <silent> <F9> <ESC>:Tlist<RETURN>
+set mouse=r
+"去空行  
+nnoremap <F2> :g/^\s*$/d<CR> 
+"列出当前目录文件  
+map <F3> :NERDTreeToggle<CR>
+imap <F3> <ESC> :NERDTreeToggle<CR>
+"打开树状文件目录  
+map <C-F3> \be  
+:autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
+"取消列高亮
+highlight CursorColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""实用设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("autocmd")
+      autocmd BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
+endif
+"当打开vim且没有文件时自动打开NERDTree
+"autocmd vimenter * if !argc() | NERDTree | endif
+" 只剩 NERDTree时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 设置当文件被改动时自动载入
+set autoread
+" quickfix模式
+autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
+"代码补全 
+"set completeopt=preview,menu 
+"允许插件  
+"filetype plugin on
+"共享剪贴板  
+"set clipboard+=unnamed 
+"自动保存
+set autowrite
+set magic                   " 设置魔术
+set guioptions-=T           " 隐藏工具栏
+set guioptions-=m           " 隐藏菜单栏
+" 不要使用vi的键盘模式，而是vim自己的
+set nocompatible
+" 去掉输入错误的提示声音
+set noeb
+" 在处理未保存或只读文件的时候，弹出确认
+set confirm
+"禁止生成临时文件
+set nobackup
+set noswapfile
+"搜索忽略大小写
+set ignorecase
+set linespace=0
+" 增强模式中的命令行自动完成操作
+set wildmenu
+" 使回格键（backspace）正常处理indent, eol, start等
+set backspace=2
+" 允许backspace和光标键跨越行边界
+set whichwrap+=<,>,h,l
+" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
+set selection=exclusive
+set selectmode=mouse,key
+" 通过使用: commands命令，告诉我们文件的哪一行被改变过
+set report=0
+" 在被分割的窗口间显示空白，便于阅读
+set fillchars=vert:\ ,stl:\ ,stlnc:\
+" 高亮显示匹配的括号
+set showmatch
+" 匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=1
+" 光标移动到buffer的顶部和底部时保持3行距离
+set scrolloff=3
+filetype plugin indent on 
+"打开文件类型检测, 加了这句才可以用智能补全
+set completeopt=longest,menu
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim 重命名
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:command! -nargs=1 Rename let tpname = expand('%:t') | saveas <args> | edit <args> | call delete(expand(tpname))
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim 函数名高亮
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syn match cFunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>[^()]*)("me=e-2
+syn match cFunctions "\<[a-zA-Z_][a-zA-Z_0-9]*\>\s*("me=e-1
+hi cFunctions gui=NONE cterm=bold  ctermfg=blue
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CTags的设定  
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Sort_Type = "name"    " 按照名称排序  
+let Tlist_Use_Right_Window = 1  " 在右侧显示窗口  
+let Tlist_Compart_Format = 1    " 压缩方式  
+let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer  
+"设置tags  
+set tags="/usr/bin/ctags"
+set autochdir 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"其他东东
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"默认打开Taglist 
+let Tlist_Auto_Open=0 
+"""""""""""""""""""""""""""""" 
+" Tag list (ctags) 
+"""""""""""""""""""""""""""""""" 
+let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
+let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
+let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
+" minibufexpl插件的一般设置
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1  
+nmap tl :Tlist<cr>
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+set iskeyword+=.
+set termencoding=utf-8
+set encoding=utf8
+set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
+filetype plugin indent on     " required!
+"
+"ctrlp设置
+"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
+let g:ctrlp_extensions = ['funky']
+let NERDTreeIgnore=['\.pyc']
+
