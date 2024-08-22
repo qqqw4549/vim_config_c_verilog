@@ -38,9 +38,10 @@ func(wchar_t * path)
 
 	system("del tags cscope*");
 	system((exe_ctag+" -R").c_str());
-	system((exe_cscope+" -Rbq").c_str());
+	system((exe_cscope+" -Rbkq").c_str());
 	
 	system("dir /S/B *.c  > cscope.files");
+	system("dir /S/B *.cpp  >> cscope.files");
 	system("dir /S/B *.h  >> cscope.files");
 	system("dir /S/B *.v  >> cscope.files");
 	system("dir /S/B *.sv  >> cscope.files");
