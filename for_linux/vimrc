@@ -1,3 +1,5 @@
+colorscheme Black
+set guifont=Courier\ New:h14
 set sw=4
 set ts=4
 set et
@@ -12,10 +14,12 @@ set mousemodel=popup
 set modifiable
 au FileType c setlocal dict+=~/.vim/dict/c.dict
 au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
-
+let g:pydiction_location = '~/.vim/tools/pydiction/complete-dict'
+let g:pydiction_menu_height = 3
 "插件管理pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
+
 "注释管理
 let g:NERDSpaceDelims = 1
 
@@ -155,11 +159,11 @@ set helplang=cn
 " 总是显示状态行
 set cmdheight=2
 " 侦测文件类型
-"filetype on
+filetype on
 " 载入文件类型插件
-"filetype plugin on
+filetype plugin on
 " 为特定文件类型载入相关缩进文件
-"filetype indent on
+filetype indent on
 " 保存全局变量
 set viminfo+=!
 " 带有如下符号的单词不要被换行分割
